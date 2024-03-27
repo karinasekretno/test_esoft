@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="house">
+        <div class="roof"></div>
+        <div class="chimney"></div>
+        <div class="window"></div>
+    </div>
+
+    <div>
+        <input type="text" id="inputString">
+        <button onclick="f()">Проверить</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function f() {
+            var input = document.getElementById("inputString").value;
+            var result = isCorrect(input);
+            document.getElementById("result").innerText = result;
+        }
+
+        function isCorrect(input) {
+            var s = [];
+            var brackets = {
+                "(": ")",
+                "[": "]",
+                "{": "}"
+            };
+
+            for (var i = 0; i < input.length; i++) {
+                var char = input[i];
+
+                if (brackets[char]) {
+                    s.push(char);
+                } else {
+                if (s.length === 0) {
+                    return false;
+                }
+
+                var top = s.pop();
+                if (brackets[top] !== char) {
+                    return false;
+                }
+                }
+            }
+
+            return s.length === 0;
+        }
+    </script>
+      
+</body>
+</html>
